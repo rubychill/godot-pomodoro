@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://addons/pomodoro/pomodoro_status.gd" type="Script" id=1]
+
+[node name="PomodoroStatus" type="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+script/script = ExtResource( 1 )
+
+[node name="Container" type="Control" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -800.0
+margin/top = 0.0
+margin/right = -760.0
+margin/bottom = 40.0
+
+[node name="TimeLeft" type="Label" parent="Container"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 14.0
+text = "0:00"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="RemainingPom" type="Label" parent="Container"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 32.0
+margin/top = 0.0
+margin/right = 123.0
+margin/bottom = 14.0
+text = "Pomodoro 1/4"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+
