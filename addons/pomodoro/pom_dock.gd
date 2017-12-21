@@ -8,6 +8,8 @@ var number_poms_edit
 var toolbar_slider
 var timer
 
+var output
+
 var pom_running = false
 var pom_time
 var short_time
@@ -29,6 +31,7 @@ func _enter_tree():
 	number_poms_edit = get_node("NumberPomsEdit")
 	toolbar_slider = get_node("ToolbarSlider")
 	timer = get_node("PomodoroTimer")
+	output = get_node("Output")
 	
 	toolbar_slider.connect("value_changed", self, "toolbar_value_changed")
 	toolbar_slider.set_val(30)
@@ -52,6 +55,7 @@ func _on_StartButton_pressed():
 		pom_running = true
 		
 		timer.set_wait_time(pom_time * 60.0)
+		timer.start()
 		
 		get_node("PauseButton").set_disabled(false)
 		get_node("ResetButton").set_disabled(false)
@@ -75,12 +79,12 @@ func _on_StartButton_pressed():
 func _on_PomodoroTimer_timeout():
 	if (current_pom > current_break): # ended pom, start break
 		current_break += 1
-		if (current_pom == num_poms): # long break, reset
+		if (current_pom + 1 < num_poms): # short break
+			timer.set_wait_time(short_time * 60.0)
+		else: # long break, reset
 			timer.set_wait_time(long_time * 60.0)
 			current_pom = -1
 			current_break = -1
-		else: # short break
-			timer.set_wait_time(short_time * 60.0)
 		emit_signal("break_started", current_break)
 	else: # ended break, start pom
 		current_pom += 1
@@ -93,7 +97,9 @@ func _on_PomodoroTimer_timeout():
 func _on_PauseButton_pressed():
 	if (!paused):
 		paused = true
+		var paused_time = timer.get_time_left()
 		timer.stop()
+		timer.set_wait_time(paused_time)
 		get_node("PauseButton").set_text("Resume")
 	else:
 		paused = false
@@ -106,16 +112,17 @@ func _on_ResetButton_pressed():
 	timer.stop()
 	get_node("ResetButton").set_disabled(true)
 	get_node("PauseButton").set_disabled(true)
+	get_node("PauseButton").set_text("Pause")
 	get_node("StartButton").set_disabled(false)
 	
-	get_node("PomTimeValue").set_text("")
+	get_node("PomTimeValue").set_text("25")
 	pom_time_edit.show()
 	
-	get_node("ShortTimeValue").set_text("")
+	get_node("ShortTimeValue").set_text("5")
 	short_time_edit.show()
 	
-	get_node("LongTimeValue").set_text("")
+	get_node("LongTimeValue").set_text("30")
 	long_time_edit.show()
 	
-	get_node("NumberPomsValue").set_text("")
+	get_node("NumberPomsValue").set_text("4")
 	number_poms_edit.show()

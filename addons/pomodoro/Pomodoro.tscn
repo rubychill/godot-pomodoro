@@ -1,17 +1,20 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=3 format=1]
 
 [ext_resource path="res://addons/pomodoro/pom_dock.gd" type="Script" id=1]
+[ext_resource path="res://addons/pomodoro/better_line_edit.gd" type="Script" id=2]
 
 [node name="Pomodoro" type="Control"]
 
+anchor/right = 1
+anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 40.0
+margin/right = 0.0
+margin/bottom = 0.0
 script/script = ExtResource( 1 )
 
 [node name="PomTimeLabel" type="Label" parent="."]
@@ -134,7 +137,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="PomTimeEdit" type="TextEdit" parent="."]
+[node name="PomTimeEdit" type="LineEdit" parent="."]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -143,15 +146,15 @@ size_flags/vertical = 2
 margin/left = 163.0
 margin/top = 3.0
 margin/right = 264.0
-margin/bottom = 33.0
-syntax_highlighting = false
-show_line_numbers = false
-highlight_all_occurrences = false
-caret/block_caret = false
+margin/bottom = 27.0
+text = "25"
+placeholder/alpha = 0.6
+focus_mode = 2
 caret/caret_blink = false
 caret/caret_blink_speed = 0.65
+script/script = ExtResource( 2 )
 
-[node name="ShortTimeEdit" type="TextEdit" parent="."]
+[node name="ShortTimeEdit" type="LineEdit" parent="."]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -160,15 +163,15 @@ size_flags/vertical = 2
 margin/left = 163.0
 margin/top = 33.0
 margin/right = 264.0
-margin/bottom = 62.0
-syntax_highlighting = false
-show_line_numbers = false
-highlight_all_occurrences = false
-caret/block_caret = false
+margin/bottom = 57.0
+text = "5"
+placeholder/alpha = 0.6
+focus_mode = 2
 caret/caret_blink = false
 caret/caret_blink_speed = 0.65
+script/script = ExtResource( 2 )
 
-[node name="LongTimeEdit" type="TextEdit" parent="."]
+[node name="LongTimeEdit" type="LineEdit" parent="."]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -177,15 +180,15 @@ size_flags/vertical = 2
 margin/left = 163.0
 margin/top = 63.0
 margin/right = 264.0
-margin/bottom = 92.0
-syntax_highlighting = false
-show_line_numbers = false
-highlight_all_occurrences = false
-caret/block_caret = false
+margin/bottom = 87.0
+text = "30"
+placeholder/alpha = 0.6
+focus_mode = 2
 caret/caret_blink = false
 caret/caret_blink_speed = 0.65
+script/script = ExtResource( 2 )
 
-[node name="NumberPomsEdit" type="TextEdit" parent="."]
+[node name="NumberPomsEdit" type="LineEdit" parent="."]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -194,13 +197,13 @@ size_flags/vertical = 2
 margin/left = 163.0
 margin/top = 93.0
 margin/right = 264.0
-margin/bottom = 121.0
-syntax_highlighting = false
-show_line_numbers = false
-highlight_all_occurrences = false
-caret/block_caret = false
+margin/bottom = 117.0
+text = "4"
+placeholder/alpha = 0.6
+focus_mode = 2
 caret/caret_blink = false
 caret/caret_blink_speed = 0.65
+script/script = ExtResource( 2 )
 
 [node name="StartButton" type="Button" parent="."]
 
@@ -294,6 +297,21 @@ process_mode = 1
 wait_time = 1.0
 one_shot = true
 autostart = false
+
+[node name="Output" type="RichTextLabel" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 8.0
+margin/top = 210.0
+margin/right = 263.0
+margin/bottom = 373.0
+bbcode/enabled = false
+bbcode/bbcode = ""
+visible_characters = -1
+percent_visible = 1.0
 
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 
